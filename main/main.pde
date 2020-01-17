@@ -56,43 +56,6 @@ void setup() {
   }
   sample = new AudioSample(this, sinewave, FPS);
   
-  //setup the input, did it like this to make adding new keys faster
-  keyMappings.put('a', AKey);
-  keyMappings.put('A', AKey);
-  keyMappings.put('s', SKey);
-  keyMappings.put('S', SKey);
-  keyMappings.put('d', DKey);
-  keyMappings.put('D', DKey);
-  keyMappings.put('w', WKey);
-  keyMappings.put('W', WKey);
-  keyMappings.put('q', QKey);
-  keyMappings.put('Q', QKey);
-  keyMappings.put('e', EKey);
-  keyMappings.put('E', EKey);
-  keyMappings.put('c', CKey);
-  keyMappings.put('C', CKey);
-  keyMappings.put('p', PKey);
-  keyMappings.put('P', PKey);
-  keyMappings.put('r', RKey);
-  keyMappings.put('R', RKey);
-  keyMappings.put('b', BKey);
-  keyMappings.put('B', BKey);
-  keyMappings.put('z', ZKey);
-  keyMappings.put('Z', ZKey);
-  keyMappings.put('x', XKey);
-  keyMappings.put('X', XKey);
-  keyMappings.put('v', VKey);
-  keyMappings.put('V', VKey);
-  keyMappings.put('f', FKey);
-  keyMappings.put('F', FKey);
-  keyMappings.put('n', NKey);
-  keyMappings.put('N', NKey);
-  keyMappings.put('/', FSlashKey);
-  keyMappings.put('?', FSlashKey);
-  keyMappings.put('t', TKey);
-  keyMappings.put('T', TKey);
-  keyMappings.put(' ', SpaceKey);
-  
   /* Default theme
   backgroundColor = color(0,0,0);
   waveformColor = color(125);
@@ -282,11 +245,50 @@ final int TKey = 20;
 
 boolean shiftChanged = false;
 //maps the processing keys to integers in our key state array, so we can add new keys as we please
-HashMap<Character, Integer> keyMappings = new HashMap<Character, Integer>();
+int keyMappings(char c){
+  switch(c){
+    case 'a': return AKey;
+    case 'A': return AKey;
+    case 's': return SKey;
+    case 'S': return SKey;
+    case 'd': return DKey;
+    case 'D': return DKey;
+    case 'w': return WKey;
+    case 'W': return WKey;
+    case 'q': return QKey;
+    case 'Q': return QKey;
+    case 'e': return EKey;
+    case 'E': return EKey;
+    case 'c': return CKey;
+    case 'C': return CKey;
+    case 'p': return PKey;
+    case 'P': return PKey;
+    case 'r': return RKey;
+    case 'R': return RKey;
+    case 'b': return BKey;
+    case 'B': return BKey;
+    case 'z': return ZKey;
+    case 'Z': return ZKey;
+    case 'x': return XKey;
+    case 'X': return XKey;
+    case 'v': return VKey;
+    case 'V': return VKey;
+    case 'f': return FKey;
+    case 'F': return FKey;
+    case 'n': return NKey;
+    case 'N': return NKey;
+    case '/': return FSlashKey;
+    case '?': return FSlashKey;
+    case 't': return TKey;
+    case 'T': return TKey;
+    case ' ': return SpaceKey;
+  }
+  return -1;
+}
 
 void keyPressed(){
-  if(keyMappings.containsKey(key)){
-    keyStates[keyMappings.get(key)]=true;
+  if(keyMappings(key)!=-1){
+    keyStates[keyMappings(key)]=true;
   }
   
   if(keyCode==SHIFT){
@@ -306,9 +308,9 @@ void keyPressed(){
 }
 
 void keyReleased(){
-  if(keyMappings.containsKey(key)){    
-    keyStates[keyMappings.get(key)]=false;
-    keyJustPressed[keyMappings.get(key)]=false;
+  if(keyMappings(key)!=-1){    
+    keyStates[keyMappings(key)]=false;
+    keyJustPressed[keyMappings(key)]=false;
   }
   
   if(keyCode==SHIFT){
